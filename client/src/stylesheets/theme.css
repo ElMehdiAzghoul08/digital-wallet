@@ -1,0 +1,38 @@
+:root {
+    --primary: rgb(27, 65, 86);
+    --secondary: rgb(178, 181, 183); 
+}
+
+.background-primary{
+    background-color: var(--primary) !important;
+}
+
+.background-secondary{
+    background-color: var(--secondary) !important;
+}
+
+.text-primary{
+    color: #fff !important;
+}
+
+.text-secondary{
+    color: var(--secondary) !important;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+.success-background{
+    background-color: #55cd91!important;
+    color: white!important;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.error-background{
+    background-color: #de7474!important;
+    color: white!important;
+    padding: 10px;
+    border-radius: 3px ;
+}
