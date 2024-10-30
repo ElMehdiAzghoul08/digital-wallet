@@ -1,10 +1,19 @@
 :root {
-    --primary: rgb(27, 65, 86);
-    --secondary: rgb(178, 181, 183); 
+    --brand-primary: #037dd6;
+    --surface-dark: #0A2540;
+    --text-light: #ffffff;
+    --text-highlight: #0A2540;
+    --border-subtle: #141618;
+    --accent-active: #037dd6;
+    --text-muted: #848c96;
+    --primary: #222645;
+    --secondary: white; 
+    --third: rgb(86, 149, 227);
 }
 
+
 .background-primary{
-    background-color: var(--primary) !important;
+    background-color: var(--surface-dark) !important;
 }
 
 .background-secondary{

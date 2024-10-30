@@ -93,6 +93,10 @@
     margin-top: 20px;
 }
 
+.margin-top-3{
+    margin-top: 40px;
+}
+
 .p-1 {
     padding:10px;
 }
@@ -104,3 +108,11 @@
 .p-3 {
     padding: 30px;
 }
+
+.flex {
+    display: flex;
+  }
+  
+  .margin-left-3 {
+    margin-left: 20px; /* Adjust this value for spacing between cards */
+  }

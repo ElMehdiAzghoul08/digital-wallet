@@ -11,6 +11,8 @@
 
 .text-m {
     font-size: 16px !important;
+    margin: 0 10px; /* Add margin for spacing around text */
+    white-space: nowrap;
 }
 
 .text-s {
