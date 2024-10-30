@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { TransferFunds, VerifyAccount } from "../../apiCalls/transactions";
 import { showLoading, HideLoading } from "../../redux/loaderSlice";
+import { ReloadUser } from "../../redux/userSlice";
+
 function FundsTransfer({ showTransferFund, setShowTransferFund, reloadData }) {
   const { user } = useSelector((state) => state.user);
-  const [isVerified, setisVerified] = React.useState("");
+  const [isVerified, setIsVerified] = useState("");
+  const [isHoverVerify, setIsHoverVerify] = useState(false); // State for hover effect
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+
   const onFinish = async (values) => {
     try {
       dispatch(showLoading());
@@ -20,6 +24,8 @@ function FundsTransfer({ showTransferFund, setShowTransferFund, reloadData }) {
       const response = await TransferFunds(payload);
       if (response.success) {
         setShowTransferFund(false);
+        reloadData();
+        dispatch(ReloadUser(true)); // Trigger reload of user data
         message.success(response.message);
       } else {
         message.error(response.message);
@@ -35,23 +41,51 @@ function FundsTransfer({ showTransferFund, setShowTransferFund, reloadData }) {
     try {
       dispatch(showLoading());
       const receiverAccount = form.getFieldValue("receiver");
-      console.log("Verifying account:", receiverAccount);
       const response = await VerifyAccount({
         receiver: receiverAccount,
       });
       dispatch(HideLoading());
-      console.log("API response:", response);
-      if (response.success) {
-        setisVerified("true");
-      } else {
-        setisVerified("false");
-      }
+      setIsVerified(response.success ? "true" : "false");
     } catch (error) {
       dispatch(HideLoading());
-      console.error("Error verifying account:", error);
-      setisVerified("false");
+      setIsVerified("false");
     }
   };
+
+  // Define separate button styles
+  const cancelButtonStyle = {
+    backgroundColor: "#f0f0f0", // Original color (adjust if needed)
+    color: "#000", // Black text for visibility
+    borderColor: "#f0f0f0",
+    height: "50px",
+    width: "150px",
+    fontSize: "15px",
+    borderRadius: "5px",
+    cursor: "pointer", // Change cursor on hover
+  };
+
+  const transferButtonStyle = {
+    backgroundColor: "#037dd6",
+    color: "#fff",
+    borderColor: "#037dd6",
+    height: "50px",
+    width: "150px",
+    fontSize: "15px",
+    borderRadius: "5px",
+    cursor: "pointer", // Change cursor on hover
+  };
+
+  const verifyButtonStyle = {
+    backgroundColor: isHoverVerify ? "#007bb5" : "#037dd6", // Change on hover
+    color: "#fff",
+    borderColor: "#037dd6",
+    height: "50px",
+    width: "150px",
+    fontSize: "15px",
+    borderRadius: "5px",
+    cursor: "pointer", // Change cursor on hover
+  };
+
   return (
     <div>
       <Modal
@@ -71,16 +105,18 @@ function FundsTransfer({ showTransferFund, setShowTransferFund, reloadData }) {
               <input type="text" />
             </Form.Item>
             <button
-              className="primary-button-contained .margin-top-1"
+              style={verifyButtonStyle} // Apply verify button style
               type="button"
               onClick={verifyAccount}
+              onMouseEnter={() => setIsHoverVerify(true)} // Mouse hover in
+              onMouseLeave={() => setIsHoverVerify(false)} // Mouse hover out
             >
               VERIFY
             </button>
           </div>
           {isVerified === "true" && (
             <div className="success-background">
-              Account successfully verification
+              Account successfully verified
             </div>
           )}
 
@@ -106,16 +142,24 @@ function FundsTransfer({ showTransferFund, setShowTransferFund, reloadData }) {
               },
             ]}
           >
-            <input type="Number" max={user.balance} />
+            <input type="number" max={user.balance} />
           </Form.Item>
           <Form.Item label="Reference" name="reference">
             <textarea type="text" />
           </Form.Item>
 
           <div className="flex justify-end gap-1">
-            <button className="primary-button-outlined">Cancel</button>
+            <button
+              style={cancelButtonStyle} // Apply cancel button style
+              type="button"
+              onClick={() => setShowTransferFund(false)}
+            >
+              Cancel
+            </button>
             {isVerified === "true" && (
-              <button className="primary-button-contained">Transfer</button>
+              <button style={transferButtonStyle} type="submit">
+                Transfer
+              </button>
             )}
           </div>
         </Form>
