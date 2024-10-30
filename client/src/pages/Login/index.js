@@ -44,9 +44,9 @@ function Login() {
           </Row>
 
           <Button
-            type="primary" // You can adjust this if needed
+            type="primary"
             className="background-primary primary-button-contained width-100 p-2"
-            htmlType="submit" // Use Ant Design's htmlType prop for form submission
+            htmlType="submit"
           >
             Login
           </Button>
