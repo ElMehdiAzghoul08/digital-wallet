@@ -1,37 +1,30 @@
 const mongoose = require("mongoose");
 
-const transactionsSchema = new mongoose.Schema(
+const requestSchema = new mongoose.Schema(
   {
-    amount: {
-      type: Number,
-      required: true,
-    },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-      required: true,
     },
     receiver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
+    },
+    amount: {
+      type: Number,
       required: true,
     },
-    type: {
-      type: String,
-      required: true,
-    },
-    reference: {
+    description: {
       type: String,
       required: true,
     },
     status: {
       type: String,
       required: true,
+      default: "pending",
     },
   },
-  {
-    timestamps: true,
-  }
-);
+  { timestamps: true }
+); // <-- Add timestamps here
 
-module.exports = mongoose.model("transactions", transactionsSchema);
+module.exports = mongoose.model("requests", requestSchema);
