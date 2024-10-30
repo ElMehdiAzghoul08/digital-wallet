@@ -35,3 +35,40 @@ export const getUserInfo = async () => {
     return error.response.data;
   }
 };
+
+// get all users
+
+export const getAllUsers = async () => {
+  try {
+    const { data } = await axiosInstance.get("/api/users/get-all-users");
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+// update users verification status
+
+export const updateVerificationStatus = async (payload) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/api/users/update-verification-status",
+      payload
+    );
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const updateProfile = async (payload) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/api/users/update-profile",
+      payload
+    );
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
