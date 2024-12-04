@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import wave from "../pages/Home/images/wave.png";
 function ProtectedLayout({ children }) {
   const [collapsed, setCollapsed] = React.useState(false);
   const { user } = useSelector((state) => state.user);

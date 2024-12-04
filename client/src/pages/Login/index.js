@@ -25,7 +25,7 @@ function Login() {
     <div className="background-primary flex items-center justify-center height-screen">
       <div className="card-1 width-400 p-2 border-radius-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl">DIGITALWALLET - LOGIN</h1>
+          <h1 className="text-2xl">E-Waves - LOGIN</h1>
         </div>
         <hr />
         <Form layout="vertical" onFinish={onFinish}>

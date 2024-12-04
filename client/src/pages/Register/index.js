@@ -22,7 +22,7 @@ function Register() {
   return (
     <div className="m-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl">DIGITALWALLET - REGISTER</h1>
+        <h1 className="text-2xl">E-Waves - REGISTER</h1>
 
         <h1 className="text-s underline" onClick={() => navigate("/login")}>
           Already a member? Login
